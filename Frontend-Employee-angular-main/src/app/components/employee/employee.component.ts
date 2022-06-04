@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./employee.component.scss']
 })
 export class EmployeeComponent implements OnInit {
+
   @Output() saved = new EventEmitter<string>();
   @Input() id: number = 0;
 
@@ -17,6 +18,8 @@ export class EmployeeComponent implements OnInit {
   workArea: WorkArea[] = [];
   identificationType: IdentificationType[] = [];
 
+  nameField = new FormControl('soy un control');
+
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -24,14 +27,14 @@ export class EmployeeComponent implements OnInit {
   ) {
     this.form = this.formBuilder.group({
       id: new FormControl(),
-      surname: ['', [Validators.required]],
-      secondSurname: ['', [Validators.required]],
-      firstName: ['', [Validators.required]],
-      otherNames: ['', [Validators.required]],
+      surname: ['', [Validators.required, Validators.maxLength(20)]],
+      secondSurname: ['', [Validators.required, Validators.maxLength(20)]],
+      firstName: ['', [Validators.required, Validators.maxLength(20)]],
+      otherNames: ['', [Validators.required, Validators.maxLength(50)]],
       country: ['', [Validators.required]],
       identificationType: ['', [Validators.required]],
       identificationNumber: ['', [Validators.required]],
-      email: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.maxLength(300)]],
       admissionDate: ['', [Validators.required]],
       workArea: ['', [Validators.required]],
       createAt: ['', [Validators.required]],
@@ -62,6 +65,9 @@ export class EmployeeComponent implements OnInit {
         });
       }
     }
+  }
+  getNameValue(){
+    console.log(this.nameField.valueChanges);
   }
 
 }

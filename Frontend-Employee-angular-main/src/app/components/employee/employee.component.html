@@ -34,6 +34,7 @@
             <input
               placeholder="Primer Nombre"
               formControlName="firstName"
+              [formControl]="nameField"
               matInput
               type="text"
             />
@@ -143,7 +144,17 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button type="submit">Guardar</button>
-      <button mat-raised-button type="submit" color="warn" (click)="saved.emit('table');">Salir</button>
+      <button
+        mat-raised-button
+        type="submit"
+        color="warn"
+        (click)="saved.emit('table')"
+      >
+        Salir
+      </button>
+      <button (click)="getNameValue()">getValue</button>
+      <p>{{ nameField.value }}</p>
     </mat-card-actions>
   </mat-card>
 </form>
+<p></p>
